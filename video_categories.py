@@ -8,16 +8,17 @@ import googleapiclient.errors
 
 import pandas as pd
 
+import creds
+
 #constants
 API_SERVICE_NAME = "youtube"
 API_VERSION = "v3"
-API_KEY = 'AIzaSyCSvjmzXxHPea49-ntvdh4P1W7M8vKNvvo'
 CSV_PATH = 'C:/Users/kevoi/OneDrive/Desktop/data-science-in-progress/youtube_categories.csv'
 
 #main function
 def category_api_runner():
     youtube = googleapiclient.discovery.build(
-        API_SERVICE_NAME, API_VERSION, developerKey=API_KEY)
+        API_SERVICE_NAME, API_VERSION, developerKey=creds.API_KEY)
 
     request = youtube.videoCategories().list(
         part="snippet",
