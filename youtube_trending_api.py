@@ -14,7 +14,6 @@ import creds
 #constants
 API_SERVICE_NAME = "youtube"
 API_VERSION = "v3"
-CSV_PATH = 'C:/Users/kevoi/OneDrive/Desktop/data-science-in-progress/youtube_data.csv'
 
 #api call
 def api_runner():
@@ -67,10 +66,10 @@ def api_runner():
     df = pd.DataFrame(df_list)
     df['timestamp'] = pd.Timestamp.now()
 
-    if not os.path.isfile(CSV_PATH):
-        df.to_csv(CSV_PATH, header = 'column_names', index = False)
+    if not os.path.isfile(creds.CSV_PATH):
+        df.to_csv(creds.CSV_PATH, header = 'column_names', index = False)
     else:
-        df.to_csv(CSV_PATH, mode = 'a', header = False, index = False)
+        df.to_csv(creds.CSV_PATH, mode = 'a', header = False, index = False)
 
 if __name__ == '__main__':
     api_runner()
