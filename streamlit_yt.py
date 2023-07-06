@@ -5,6 +5,17 @@ import plotly.express as px
 from datetime import datetime, timedelta
 
 st.header('Youtube Analytics')
+df = pd.read_csv('youtube_data.csv')
+
+
+categories = pd.read_csv('youtube_categories.csv')
+
+#updating streamlit_data.csv
+df = df.merge(categories, on = 'category_id', how = 'left')
+df = df.drop_duplicates(subset = 'video_id')
+df['engagement'] = (df['like_count'] + df['comment_count']) / df['view_count']
+
+df.to_csv('streamlit_data.csv', index = False)
 
 df = pd.read_csv('streamlit_data.csv')
 df['published_at'] = pd.to_datetime(df['published_at'])
